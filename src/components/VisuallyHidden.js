@@ -7,8 +7,8 @@ const VisuallyHidden = {
       style: {
         border: '0px',
         clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
+        height: '0px',
+        width: '0px',
         margin: '-1px',
         padding: '0px',
         overflow: 'hidden',

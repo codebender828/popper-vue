@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <button ref="referenceEl" @click="toggle">Toggle portal</button>
-    <Popper
+    <!-- <Popper
       :is-open="show"
       :reference-element="$refs.referenceEl"
       :content-element="$refs.popperContent"
@@ -9,17 +9,24 @@
     >
       <aside id="popper-content" style="width: 100px; height: 60px; background: coral;" ref="popperContent">
       </aside>
-    </Popper>
+    </Popper> -->
+    <Portal>
+      <footer>
+        Portal content
+      </footer>
+    </Portal>
   </div>
 </template>
 
 <script>
-import Popper from './components/Popper'
+// import Popper from './components/Popper'
+import Portal from './components/Portal'
 
 export default {
   name: 'app',
   components: {
-    Popper
+    // Popper
+    Portal
   },
   data () {
     return {
