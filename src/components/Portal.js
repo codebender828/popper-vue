@@ -44,13 +44,16 @@ const Portal = {
   },
   setup (props, context) {
     const portalTarget = createPortalTarget(props.target)
-    return () => h(MountingPortal, {
-      props: {
-        ...context.attrs,
-        append: props.append,
-        mountTo: `#${portalTarget.id}`
-      }
-    }, context.slots.default())
+    return () => {
+      const children = context.slots.default
+      return h(MountingPortal, {
+        props: {
+          ...context.attrs,
+          append: props.append,
+          mountTo: `#${portalTarget.id}`
+        }
+      }, children ? children() : null)
+    }
   }
 }
 

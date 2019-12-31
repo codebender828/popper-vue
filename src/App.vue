@@ -1,42 +1,29 @@
 <template>
   <div id="app">
     <button ref="referenceEl" @click="toggle">Toggle portal</button>
-    <!-- <Popper
+    <Popper
       :is-open="show"
       :reference-element="$refs.referenceEl"
       :content-element="$refs.popperContent"
-      placement="bottom"
     >
       <aside id="popper-content" style="width: 100px; height: 60px; background: coral;" ref="popperContent">
       </aside>
-    </Popper> -->
-    <Portal>
-      <footer>
-        Portal content
-      </footer>
-    </Portal>
+    </Popper>
   </div>
 </template>
 
 <script>
-// import Popper from './components/Popper'
-import Portal from './components/Portal'
+import Popper from './components/Popper'
 
 export default {
   name: 'app',
   components: {
-    // Popper
-    Portal
+    Popper
   },
   data () {
     return {
       show: false
     }
-  },
-  created () {
-    const target = document.createElement('div')
-    target.id = 'widget'
-    document.body.appendChild(target)
   },
   methods: {
     toggle () {

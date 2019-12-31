@@ -1,6 +1,7 @@
 import { createElement as h, watch, ref } from '@vue/composition-api'
 import PopperJS from 'popper.js'
 import VisuallyHidden from './VisuallyHidden'
+import Portal from './Portal'
 
 const Popper = {
   name: 'Popper',
@@ -37,13 +38,18 @@ const Popper = {
       }
     })
 
-    return () => props.usePortal ? h('MountingPortal', {
-      props: {
-        mountTo: '#widget',
-        append: true,
-        disabled: props.usePortal
-      }
-    }, [h(VisuallyHidden, {}, context.slots.default())]) : h(VisuallyHidden, {}, context.slots.default())
+    return () => {
+      const children = context.slots.default()
+      return props.usePortal ? h(Portal, {
+        props: {
+          target: '#popper-vue',
+          append: true
+        },
+        attrs: {
+          disabled: !props.usePortal
+        }
+      }, [h(VisuallyHidden, {}, children)]) : h(VisuallyHidden, {}, children)
+    }
   }
 }
 
