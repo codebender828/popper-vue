@@ -4,10 +4,9 @@
     <Popper
       :is-open="show"
       :anchor-el="$refs.anchorEl"
-      :content-el="$refs.popper"
+      :popper-el="$refs.popper"
       :use-portal="false"
       :on-close="hidePopper"
-      :closeOnClickAway="false"
     >
       <aside id="popper-content" ref="popper">
         I am a Happy Popper 😀

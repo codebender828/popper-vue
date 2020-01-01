@@ -78,8 +78,11 @@ export default {
 #### 📅 Events
 | Events        | Description   | Payload |
 | ------------- |---------------| ----- |
-| afterOpen     | Emitted when `popperEl` is open and has been mounted by `popper.js` | `{ el: popperEl<HTMLElement> }` |
-| afterClose     | Emitted when `popperEl` is closed and has been unmounted by `popper.js` | `{ el: HTMLElement }` |
+| `popper:create`     | Emitted when `popperEl` is open and has been mounted by `popper.js` | `{ el: popperEl<HTMLElement> }` |
+| `popper:update`     | Emitted when `popperEl` is closed and has been unmounted by `popper.js` | `{ el: HTMLElement }` |
+
+### ⚠️ Caveats
+- The `popper:close` event is not emitted by popper if the
 
 ### 📚TODO
  - [ ] Add support for JS and CSS transitions
@@ -111,3 +114,4 @@ If you like this project, please consider supporting it by buying my a coffee!
   <br>
   Made with ❤️ by <a target="_blank" href="https://twitter.com/codebender828">Jonathan Bakebwa 🇺🇬</a>
 </center>
+
