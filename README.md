@@ -1,6 +1,6 @@
 
 <h1 align="center"><code>🎊 popper-vue (WIP)</code></h1>
-<h4 align="center">A lightweight Bring You Own Component(BYOC) Popper for Vue.js</h4>
+<h4 align="center">A lightweight bring-your-own-component(BYOC) Popper for Vue.js</h4>
 
 ### 🌟 Features
 `popper-vue` neatly and snugly implements Popper.js into a simple `<Popper>` component that you can use to wrap it's children inside of a popper around an anchor element in your Vue applications.
