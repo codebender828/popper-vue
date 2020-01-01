@@ -9,7 +9,11 @@ const ClickOutside = {
   },
   setup (props, context) {
     const listener = (e, el) => {
-      if (e.target === el || el.contains(e.target) || props.whitelist.includes(e.target)) return
+      if (
+        e.target === el ||
+        el.contains(e.target) ||
+        (props.whitelist.includes(e.target) && props.active)
+      ) return
       if (props.do) props.do()
     }
 

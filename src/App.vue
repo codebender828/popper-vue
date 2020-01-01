@@ -5,8 +5,8 @@
       :is-open="show"
       :anchor-el="$refs.anchorEl"
       :popper-el="$refs.popper"
-      :use-portal="false"
       :on-close="hidePopper"
+      :closeOnClickAway="false"
     >
       <aside id="popper-content" ref="popper">
         I am a Happy Popper 😀
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Popper from './components/Popper'
+import { Popper } from './components/Popper'
 
 export default {
   name: 'app',

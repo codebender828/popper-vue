@@ -79,10 +79,11 @@ export default {
 | Events        | Description   | Payload |
 | ------------- |---------------| ----- |
 | `popper:create`     | Emitted when `popperEl` is open and has been mounted by `popper.js` | `{ el: popperEl<HTMLElement> }` |
-| `popper:update`     | Emitted when `popperEl` is closed and has been unmounted by `popper.js` | `{ el: HTMLElement }` |
+| `popper:update`     | Emitted when Popper.js instance undergoes an update | `{ el: HTMLElement }` |
+| `popper:close`     | Emitted when `popperEl` is closed and has been unmounted by `popper.js` | `{}` |
 
 ### ⚠️ Caveats
-- The `popper:close` event is not emitted by popper if the
+- The `popper:close` event is sometimes emitted **twice** when the popper is being closed when the `closeOnClickAway` props is **truthy**. Currently there are no implemented workarounds for this yet, so while using this component make sure to be careful of it. It's also worth pointing out that this may not be that big of a problem for most consumer use cases
 
 ### 📚TODO
  - [ ] Add support for JS and CSS transitions

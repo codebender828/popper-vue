@@ -5,6 +5,7 @@
  * @returns {Vue.VNode} Cloned VNodes
  */
 export function cloneVNode (vnode, createElement) {
+  console.log(createElement)
   const clonedChildren = vnode.children && vnode.children.map(vnode => cloneVNode(vnode))
   const cloned = createElement(vnode.tag, vnode.data, clonedChildren)
   cloned.text = vnode.text
