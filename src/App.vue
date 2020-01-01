@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <button ref="referenceEl" @click="toggle">Toggle portal</button>
+    <button ref="anchorEl" @click="showPopper">Toggle portal</button>
     <Popper
       :is-open="show"
-      :reference-element="$refs.referenceEl"
-      :content-element="$refs.popperContent"
+      :anchor-el="$refs.anchorEl"
+      :content-el="$refs.popper"
+      :use-portal="false"
+      :on-close="hidePopper"
+      :closeOnClickAway="false"
     >
-      <aside id="popper-content" style="width: 100px; height: 60px; background: coral;" ref="popperContent">
+      <aside id="popper-content" ref="popper">
+        I am a Happy Popper 😀
       </aside>
     </Popper>
   </div>
@@ -26,8 +30,11 @@ export default {
     }
   },
   methods: {
-    toggle () {
+    showPopper () {
       this.show = !this.show
+    },
+    hidePopper () {
+      this.show = false
     }
   }
 }

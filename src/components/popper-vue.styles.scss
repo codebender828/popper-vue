@@ -1,0 +1,82 @@
+.popper-vue {
+  [x-arrow] {
+    --arrow-size: inherit;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    position: absolute;
+    transform: rotate(45deg);
+  
+    &::before {
+      --arrow-size: inherit;
+      content: "";
+      width: var(--arrow-size);
+      height: var(--arrow-size);
+      position: absolute;
+      z-index: -1;
+    }
+  }
+  
+  
+  &[x-placement^="top"] {
+    --popover-margin: inherit;
+    margin-bottom: var(--popover-margin);
+    transform-origin: bottom center;
+  }
+  
+  &[x-placement^="top"] [x-arrow] {
+    --arrow-position: inherit;
+    bottom: var(--arrow-position);
+  }
+  
+  &[x-placement^="top"] [x-arrow]::before {
+    --arrow-shadow-color: inherit;
+    box-shadow: 2px 2px 2px 0 var(--arrow-shadow-color);
+  }
+  
+  &[x-placement^="bottom"] {
+    --popover-margin: inherit;
+    margin-top: var(--popover-margin);
+    transform-origin: top center;
+  }
+  
+  &[x-placement^="bottom"] [x-arrow] {
+    --arrow-position: inherit;
+    --arrow-shadow-color: inherit;
+    top: var(--arrow-position);
+  
+    &::before {
+      box-shadow: -1px -1px 1px 0 var(--arrow-shadow-color);
+    }
+  }
+  
+  &[x-placement^="right"] {
+    --popover-margin: inherit;
+    margin-left: var(--popover-margin);
+    transform-origin: left center;
+  }
+  
+  &[x-placement^="right"] [x-arrow] {
+    --arrow-position: inherit;
+    --arrow-shadow-color: inherit;
+    left: var(--arrow-position);
+  
+    &::before {
+      box-shadow: -1px 1px 1px 0 var(--arrow-shadow-color);
+    }
+  }
+  
+  &[x-placement^="left"] {
+    --popover-margin: inherit;
+    margin-right: var(--popover-margin);
+    transform-origin: right center;
+  }
+  
+  &[x-placement^="left"] [x-arrow] {
+    --arrow-position: inherit;
+    --arrow-shadow-color: inherit;
+    right: var(--arrow-position);
+    &::before {
+      box-shadow: 1px -1px 1px 0 var(--arrow-shadow-color);
+    }
+  }
+}

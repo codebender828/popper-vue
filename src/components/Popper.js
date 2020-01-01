@@ -1,7 +1,9 @@
 import { createElement as h, watch, ref } from '@vue/composition-api'
 import PopperJS from 'popper.js'
 import VisuallyHidden from './VisuallyHidden'
-import Portal from './Portal'
+import './popper-vue.styles.scss'
+const Portal = () => import(/* webpackChunkName: "Portal-component" */'./Portal')
+const ClickOutside = () => import(/* webpackChunkName: "ClickOutside-component" */'./ClickOutside')
 
 const Popper = {
   name: 'Popper',
@@ -15,8 +17,16 @@ const Popper = {
       type: Boolean,
       default: true
     },
-    referenceElement: [HTMLElement, Object],
-    contentElement: [HTMLElement, Object]
+    onClose: {
+      type: Function,
+      default: () => null
+    },
+    closeOnClickAway: {
+      type: Boolean,
+      default: true
+    },
+    anchorEl: [HTMLElement, Object],
+    contentEl: [HTMLElement, Object]
   },
   setup (props, context) {
     const popperRef = ref(null)
@@ -26,7 +36,7 @@ const Popper = {
         if (popperRef.value) {
           popperRef.value.scheduleUpdate()
         } else {
-          popperRef.value = new PopperJS(props.referenceElement, props.contentElement, {
+          popperRef.value = new PopperJS(props.anchorEl, props.contentEl, {
             placement: props.placement
           })
         }
@@ -48,7 +58,19 @@ const Popper = {
         attrs: {
           disabled: !props.usePortal
         }
-      }, [h(VisuallyHidden, {}, children)]) : h(VisuallyHidden, {}, children)
+      }, [h(VisuallyHidden, {}, [h(ClickOutside, {
+        props: {
+          whitelist: [props.anchorEl],
+          active: props.closeOnClickAway,
+          do: props.onClose
+        }
+      }, children)])]) : h(VisuallyHidden, {}, [h(ClickOutside, {
+        props: {
+          whitelist: [props.anchorEl],
+          active: props.closeOnClickAway,
+          do: props.onClose
+        }
+      }, children)])
     }
   }
 }
