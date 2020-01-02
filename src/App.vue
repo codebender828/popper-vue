@@ -6,8 +6,8 @@
       :anchor-el="$refs.anchorEl"
       :popper-el="$refs.popper"
       :on-close="hidePopper"
-      placement="left"
-      :usePortal="false"
+      :placement="placement"
+      :usePortal="usePortal"
       @popper:create="focus($refs.input)"
       @popper:close="focus($refs.anchorEl)"
     >
@@ -21,8 +21,10 @@
 </template>
 
 <script>
-import { Popper } from './components/Popper'
+import { Popper } from './lib'
 import Loader from './components/Loader'
+
+console.log(Popper)
 
 export default {
   name: 'app',
@@ -30,9 +32,24 @@ export default {
     Popper,
     Loader
   },
+  created () {
+    const descContent = 'A lightweight Popper for Vue.js'
+    const createDescription = () => {
+      const desc = document.createElement('meta')
+      desc.setAttribute('name', 'description')
+      desc.setAttribute('content', descContent)
+      return document.head.appendChild(desc)
+    }
+    const description = document.head.querySelector('meta[name=description]')
+    document.title = '🎊 PopperVue'
+    description ? document.content = descContent
+      : createDescription()
+  },
   data () {
     return {
-      show: false
+      show: false,
+      usePortal: true,
+      placement: 'auto'
     }
   },
   methods: {

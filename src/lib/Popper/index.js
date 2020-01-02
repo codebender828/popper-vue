@@ -1,12 +1,12 @@
 import { createElement as h, watch, ref } from '@vue/composition-api'
 import PopperJS from 'popper.js'
-import VisuallyHidden from './VisuallyHidden'
+import VisuallyHidden from '../VisuallyHidden'
 import './popper-vue.styles.scss'
 import { createChainedFunction } from '../utils'
-const Portal = () => import(/* webpackChunkName: "Portal-component" */'./Portal')
-const ClickOutside = () => import(/* webpackChunkName: "ClickOutside-component" */'./ClickOutside')
+const Portal = () => import(/* webpackChunkName: "Portal-component" */'../Portal')
+const ClickOutside = () => import(/* webpackChunkName: "ClickOutside-component" */'../ClickOutside')
 
-export const PopperArrow = {
+const PopperArrow = {
   name: 'PopperArrow',
   setup () {
     return () => h('div', {
@@ -21,7 +21,7 @@ export const PopperArrow = {
   }
 }
 
-export const Popper = {
+const Popper = {
   name: 'Popper',
   props: {
     isOpen: Boolean,
@@ -52,7 +52,6 @@ export const Popper = {
       default: true
     },
     positionFixed: Boolean,
-    removeOnDestroy: Boolean,
     hasArrow: {
       type: Boolean,
       default: true
@@ -98,12 +97,21 @@ export const Popper = {
       return node
     }
 
+    /**
+     * Update placement when placement prop value changes.
+     */
+    watch(() => props.placement, (newValue, prevValue) => {
+      if (popperRef.value) {
+        popperRef.value.options.placement = newValue
+        popperRef.value.scheduleUpdate()
+      }
+    })
+
     watch(() => {
       if (props.isOpen) {
         if (popperRef.value) {
           popperRef.value.scheduleUpdate()
         } else {
-          // props.popperEl && props.popperEl.classList.add('popper-vue')
           popperRef.value = new PopperJS(props.anchorEl, props.popperEl, {
             placement: props.placement,
             modifiers: {
@@ -121,8 +129,7 @@ export const Popper = {
               handlePopperCreated
             ),
             eventsEnabled: props.eventsEnabled,
-            positionFixed: props.positionFixed,
-            removeOnDestroy: props.removeOnDestroy
+            positionFixed: props.positionFixed
           })
         }
       } else {
@@ -137,10 +144,13 @@ export const Popper = {
     return () => {
       const children = context.slots.default()
       if (children.length > 1) {
+        // eslint-disable-next-line
         return console.error(`[PopperVue]: The <Popper> component expects only one child element at it's root. You passed ${children.length} child nodes.`)
       }
 
-      // Add arrow if arrow is to be shown
+      /**
+       * Add arrow element to children list if hasArrow props is to be shown
+       */
       if (props.hasArrow && props.isOpen) {
         children[0].children.push(h(PopperArrow))
         bindArrowClass(children, h)
@@ -170,4 +180,9 @@ export const Popper = {
       }, children)])
     }
   }
+}
+
+export {
+  Popper,
+  PopperArrow
 }

@@ -2,7 +2,7 @@ import { createElement as h } from '@vue/composition-api'
 import { canUseDOM, useId, getSubstringAfterChar as gs } from '../utils'
 import { MountingPortal } from 'portal-vue'
 
-const PORTAL_ID = '#vue-popper-portal'
+const PORTAL_ID = '#popper-vue-portal'
 
 /**
  * @description Creates portal target node. If node doesn't exist, it is created and returned
