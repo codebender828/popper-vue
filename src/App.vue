@@ -1,27 +1,34 @@
 <template>
   <div id="app">
-    <button ref="anchorEl" @click="showPopper">Toggle portal</button>
+    <button ref="anchorEl" @click="showPopper">Toggle Popper</button>
     <Popper
       :is-open="show"
       :anchor-el="$refs.anchorEl"
       :popper-el="$refs.popper"
       :on-close="hidePopper"
-      :closeOnClickAway="false"
+      placement="left"
+      :usePortal="false"
+      @popper:create="focus($refs.input)"
+      @popper:close="focus($refs.anchorEl)"
     >
-      <aside id="popper-content" ref="popper">
-        I am a Happy Popper 😀
-      </aside>
+      <form id="popper-content" class="aside-popper" ref="popper">
+        <Loader />
+        <label for="input">Name</label>
+        <input @keydown.esc="hidePopper" id="input" class="focus-outline" value="I ❤️ Popper Vue 😍" type="text" ref="input">
+      </form>
     </Popper>
   </div>
 </template>
 
 <script>
 import { Popper } from './components/Popper'
+import Loader from './components/Loader'
 
 export default {
   name: 'app',
   components: {
-    Popper
+    Popper,
+    Loader
   },
   data () {
     return {
@@ -34,12 +41,17 @@ export default {
     },
     hidePopper () {
       this.show = false
+    },
+    focus (el) {
+      this.$nextTick(() => {
+        el && el.focus()
+      })
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 html,
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -55,5 +67,43 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+button {
+  padding: 0.9rem 1.5rem;
+  border-radius: 3px;
+  color:#fff;
+  background: darkslategray;
+  border: none;
+  font-weight: 700;
+  font-size: 1em;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6)
+  }
+}
+
+.focus-outline {
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6)
+  }
+}
+
+.aside-popper {
+  padding: 2rem;
+  background: #efefef;
+  border-radius: 3px;
+
+  input {
+    margin-left: 5px;
+    outline: none;
+    padding: 5px;
+    border: #d2d2d2 2px solid;
+    border-radius: 5px;
+    font-size: 1.3rem;
+  }
 }
 </style>

@@ -47,7 +47,10 @@ export const Popper = {
     },
     anchorEl: [HTMLElement, Object],
     popperEl: [HTMLElement, Object],
-    eventsEnabled: Boolean,
+    eventsEnabled: {
+      type: Boolean,
+      default: true
+    },
     positionFixed: Boolean,
     removeOnDestroy: Boolean,
     hasArrow: {
@@ -138,7 +141,7 @@ export const Popper = {
       }
 
       // Add arrow if arrow is to be shown
-      if (props.hasArrow) {
+      if (props.hasArrow && props.isOpen) {
         children[0].children.push(h(PopperArrow))
         bindArrowClass(children, h)
       }
