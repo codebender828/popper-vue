@@ -1,10 +1,10 @@
 import { createElement as h, watch, ref } from '@vue/composition-api'
 import PopperJS from 'popper.js'
 import VisuallyHidden from '../VisuallyHidden'
+import Portal from '../Portal'
+import ClickOutside from '../ClickOutside'
 import './popper-vue.styles.scss'
 import { createChainedFunction } from '../utils'
-const Portal = () => import(/* webpackChunkName: "Portal-component" */'../Portal')
-const ClickOutside = () => import(/* webpackChunkName: "ClickOutside-component" */'../ClickOutside')
 
 const PopperArrow = {
   name: 'PopperArrow',
