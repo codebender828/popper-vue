@@ -69,7 +69,7 @@ const Popper = {
         // There should be a much cleaner way to do this.
         // But for now this works. Should return with bigger guns.
         ? canUseDOM && document.querySelector(this.portalTarget).firstChild
-        : this.getNode(this.$el)
+        : this.getNode(this.$el.firstChild)
       return ref
     }
   },
