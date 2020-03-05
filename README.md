@@ -1,5 +1,5 @@
 
-<h1 align="center"><code>🎊 popper-vue (WIP)</code></h1>
+<h1 align="center"><code>🎊 popper-vue</code></h1>
 <h4 align="center">A lightweight bring-your-own-component(BYOC) Popper for Vue.js</h4>
 
 ### 🌟 Features
