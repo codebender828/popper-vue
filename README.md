@@ -8,6 +8,8 @@
 - **Functional default styles:** Import the provided css for some nice styling defaults or write your own styles.
 - **Portal your poppers anywhere in the DOM:** You can use a portal element to render your popper, or if you want to yet, use direct child.
 
+### [Codesandbox Demo](https://codesandbox.io/s/popper-vue-starter-nipsz)
+
 ### ⚡️ Installation (🚨 This package has not been published yet)
 ```bash
 $ npm install popper-vue popper.js
