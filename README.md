@@ -86,14 +86,12 @@ export default {
 - The `popper:close` event is sometimes emitted **twice** when the popper is being closed when the `closeOnClickAway` props is **truthy**. Currently there are no implemented workarounds for this yet, so while using this component make sure to be careful of it. It's also worth pointing out that this may not be that big of a problem for most consumer use cases
 
 ### 📚TODO
- - [ ] Create usePopper utility hook
- - [ ] Add support for JS and CSS transitions
+ - [ ] Create usePopper utility plugin funciton hook
+ - [ ] Publish to NPM
  - [ ] Docs site
  - [ ] Codesandbox examples
  - [ ] Articles to illustrate how to use `popper-vue` in component library
- - [ ] Type declaration files
- - [ ] Publish to NPM
- - [ ] Create Vue plugin to register components
+ - [ ] Type declaration files for plugin
 
 
 

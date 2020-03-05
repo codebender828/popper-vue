@@ -37,7 +37,7 @@ const commons = {
       include: /node_modules/
     }),
     scss({
-      output: 'build/popper-vue.css'
+      output: 'dist/popper-vue.css'
     }),
     production && terser()
   ]
@@ -48,12 +48,12 @@ const commons = {
  */
 export default [
   {
-    input: 'src/lib/index.js',
+    input: 'src/index.js',
     output: [
       {
         banner,
         name,
-        dir: `build/esm/`,
+        dir: `dist/esm/`,
         format: 'esm',
         exports: 'named',
         globals
@@ -62,12 +62,12 @@ export default [
     ...commons
   },
   {
-    input: 'src/lib/index.js',
+    input: 'src/index.js',
     output: [
       {
         banner,
         name,
-        dir: `build/umd/`,
+        dir: `dist/umd/`,
         format: 'umd',
         exports: 'named',
         globals
@@ -76,12 +76,12 @@ export default [
     ...commons
   },
   {
-    input: 'src/lib/index.js',
+    input: 'src/index.js',
     output: [
       {
         banner,
         name,
-        dir: `build/cjs/`,
+        dir: `dist/cjs/`,
         format: 'cjs',
         exports: 'named',
         globals
