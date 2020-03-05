@@ -17,11 +17,11 @@
     "src"
   ],
   "dependencies": {
-    "portal-vue": "^2.1.7"
   },
   "peerDependencies": {
     "@popperjs/core": "^2.0.6",
     "popper.js": "^1.16.1",
+    "portal-vue": "^2.1.7",
     "vue": "^2.6.10"
   },
   "babel": {
