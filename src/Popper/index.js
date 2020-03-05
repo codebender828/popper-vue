@@ -1,5 +1,4 @@
 import PopperJS from 'popper.js'
-import Portal from '../Portal'
 import ClickOutside from '../ClickOutside'
 import './popper-vue.styles.scss'
 import { createChainedFunction, useId, canUseDOM, isVueComponent, HTMLElement } from '../utils'
@@ -183,31 +182,7 @@ const Popper = {
       this.bindArrowClass(children, h)
     }
 
-    return this.usePortal ? h(Portal, {
-      props: {
-        append: true,
-        target: this.portalTarget,
-        disabled: !this.usePortal,
-        slim: true,
-        unmountOnDestroy: true,
-        targetSlim: true
-      },
-      domProps: {
-        disabled: !this.usePortal
-      },
-      ref: 'portalRef'
-    }, [h('div', {
-      style: {
-        display: this.isOpen ? 'unset' : 'none'
-      }
-    }, [
-      h(ClickOutside, {
-        props: {
-          whitelist: [this.anchorEl],
-          active: this.closeOnClickAway,
-          do: this.wrapClose
-        }
-      }, children) ])]) : h('div', {
+    return h('div', {
       style: {
         display: this.isOpen ? 'unset' : 'none'
       }
