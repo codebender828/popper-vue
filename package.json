@@ -1,6 +1,6 @@
 {
   "name": "popper-vue",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -33,6 +33,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.7.7",
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/preset-env": "^7.8.7",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-preset-latest": "^6.24.1",
