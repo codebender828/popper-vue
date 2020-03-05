@@ -14,7 +14,17 @@ $ npm install popper-vue popper.js
 ```
 > Please note that `popper-vue` assumes that you already have Vue.js installed in your application. If you not have Vue installed. Install it by running `npm install vue --save`
 
+#### Global `Popper` registration
+In your `main.js`:
+```js
+import { Popper } from 'popper-vue'
+import 'popper-vue/dist/popper-vue.css'
 
+Vue.component('Popper', Popper)
+```
+
+
+#### Local `Popper` import
 In your templates:
 ```html
 <template>
@@ -34,6 +44,7 @@ In your templates:
 
 <script lang="js">
 import { Popper } from 'popper-vue'
+import 'popper-vue/dist/popper-vue.css'
 
 export default {
   name: 'App',
@@ -60,31 +71,34 @@ export default {
 ### 🏋🏼‍♀️ API
 `popper-vue` provides a few components that allow to render custom popper components.
 
+✅ -  Completed!
+⚠️ -  WIP
 #### 🧤 Props
 | Props         | Description   | Values | Default |
-| :-------------: |-------------| ----- | --- |
-| anchorEl      | Anchor element around which popper is positioned | `HTMLElement` |  N/A  |
-| placement      | Default position where `popperEl` should be placed when Popper is open | `top`, `right`, `bottom`, `left` |  `bottom`  |
-| modifiers      | Modifier options for `popper.js`. See [popper.js docs]() for more information | `Object` |  `{}`  |
-| isOpen      | Determines whether the Popper is open or not | `Boolean` |  `false`  |
-| onClose  | Handler function to be called when the popper is to be closed | `Function` |  `null`  |
-| closeOnClickAway  | Determines whether popper should close when other elements are clicked | `Boolean` |  `true`  |
-| usePortal  | Determines whether popper should mount `popperEl` in portal before positioning it around anchor. | `Boolean` |  `false`  |
-| hasArrow  | Determines whether popper should possess arrow when shown | `Boolean` |  `true`  |
+| :------------- |-------------| ----- | --- |
+| ✅anchorEl      | Anchor element around which popper is positioned | `HTMLElement` |  N/A  |
+| ✅ placement      | Default position where `popperEl` should be placed when Popper is open | `top`, `right`, `bottom`, `left` |  `bottom`  |
+| ✅ modifiers      | Modifier options for `popper.js`. See [popper.js docs]() for more information | `Object` |  `{}`  |
+| ✅ isOpen      | Determines whether the Popper is open or not | `Boolean` |  `false`  |
+| ✅ onClose  | Handler function to be called when the popper is to be closed | `Function` |  `null`  |
+| ✅closeOnClickAway  | Determines whether popper should close when other elements are clicked | `Boolean` |  `true`  |
+| ⚠️ usePortal  | Determines whether popper should mount `popperEl` in portal before positioning it around anchor. | `Boolean` |  `false`  |
+| ✅ hasArrow  | Determines whether popper should possess arrow when shown | `Boolean` |  `true`  |
 
 
 #### 📅 Events
 | Events        | Description   | Payload |
 | ------------- |---------------| ----- |
-| `popper:create`     | Emitted when `popperEl` is open and has been mounted by `popper.js` | `{ el: popperEl<HTMLElement> }` |
-| `popper:update`     | Emitted when Popper.js instance undergoes an update | `{ el: HTMLElement }` |
-| `popper:close`     | Emitted when `popperEl` is closed and has been unmounted by `popper.js` | `{}` |
+| ✅ `popper:create`     | Emitted when `popperEl` is open and has been mounted by `popper.js` | `{ el: popperEl<HTMLElement> }` |
+| ✅ `popper:update`     | Emitted when Popper.js instance undergoes an update | `{ el: HTMLElement }` |
+| ✅ `popper:close`     | Emitted when `popperEl` is closed and has been unmounted by `popper.js` | `{}` |
 
 ### ⚠️ Caveats
 - The `popper:close` event is sometimes emitted **twice** when the popper is being closed when the `closeOnClickAway` props is **truthy**. Currently there are no implemented workarounds for this yet, so while using this component make sure to be careful of it. It's also worth pointing out that this may not be that big of a problem for most consumer use cases
 
 ### 📚TODO
  - [x] Publish to NPM
+ - [ ] Upgrade to `@popperjs/core` support
  - [ ] Finish Popper Portal implementation
  - [ ] Create usePopper utility plugin funciton hook
  - [ ] Docs site
