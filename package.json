@@ -1,6 +1,6 @@
 {
   "name": "popper-vue",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": false,
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -16,8 +16,7 @@
     "dist",
     "src"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@popperjs/core": "^2.0.6",
     "popper.js": "^1.16.1",
