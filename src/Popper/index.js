@@ -2,7 +2,7 @@ import PopperJS from 'popper.js'
 import Portal from '../Portal'
 import ClickOutside from '../ClickOutside'
 import './popper-vue.styles.scss'
-import { createChainedFunction, useId } from '../utils'
+import { createChainedFunction, useId, canUseDOM, isVueComponent, HTMLElement } from '../utils'
 
 const PopperArrow = {
   name: 'PopperArrow',
@@ -29,7 +29,7 @@ const Popper = {
     },
     usePortal: {
       type: Boolean,
-      default: true
+      default: false
     },
     onClose: {
       type: Function,
@@ -44,7 +44,6 @@ const Popper = {
       default: () => {}
     },
     anchorEl: [HTMLElement, Object],
-    popperEl: [HTMLElement, Object],
     eventsEnabled: {
       type: Boolean,
       default: true
@@ -64,9 +63,77 @@ const Popper = {
   computed: {
     portalTarget () {
       return this.usePortalTarget || `#popper-vue-portal-${useId(4)}`
+    },
+    reference () {
+      const ref = this.usePortal
+        // There should be a much cleaner way to do this.
+        // But for now this works. Should return with bigger guns.
+        ? canUseDOM && document.querySelector(this.portalTarget).firstChild
+        : this.getNode(this.$el)
+      return ref
+    }
+  },
+  watch: {
+    placement (newValue) {
+      if (this.popper) {
+        this.popper.options.placement = newValue
+        this.popper.scheduleUpdate()
+      }
+    },
+    isOpen (newValue) {
+      if (newValue) this.handlerPopperOpen()
+      else this.handlePopperClose()
     }
   },
   methods: {
+    /**
+     * Handles open state for Popper
+     */
+    handlerPopperOpen () {
+      // Double check to make sure portal target is mounted
+      // If it already is mounted, Portal component will use
+      // the existing portal target to mount popper children
+      (this.usePortal && this.$refs.portalRef) && this.$refs.portalRef.mountTarget()
+      if (!this.anchorEl || !this.reference) return
+      this.popper = new PopperJS(this.anchorEl, this.reference, {
+        placement: this.placement,
+        modifiers: {
+          ...(this.usePortal && {
+            preventOverflow: {
+              boundariesElement: 'window'
+            }
+          }),
+          ...this.modifiers
+        },
+        onUpdate: createChainedFunction(
+          this.handlePopperUpdate
+        ),
+        onCreate: createChainedFunction(
+          this.handlePopperCreated
+        ),
+        eventsEnabled: this.eventsEnabled,
+        positionFixed: this.positionFixed
+      })
+      this.popper.scheduleUpdate()
+    },
+    /**
+     * Closes Popper Element
+     */
+    handlePopperClose () {
+      if (this.popper) {
+        this.popper.destroy()
+        this.popper = null
+        this.$emit('popper:close', {})
+      }
+    },
+    /**
+     * Returns the HTML element of a Vue component or native element
+     * @param {Vue.Component|HTMLElement} element HTMLElement or Vue Component
+     */
+    getNode (element) {
+      const isVue = isVueComponent(element)
+      return isVue ? element.$el : element
+    },
     /**
      * Wrapped handler for close events
      */
@@ -101,48 +168,6 @@ const Popper = {
       return node
     }
   },
-  mounted () {
-    this.$watch(vm => [vm.placement], () => {
-      if (this.popper) {
-        this.popper.options.placment = this.placement
-        this.popper.scheduleUpdate()
-      }
-    })
-
-    this.$watch(() => {
-      if (this.isOpen) {
-        if (this.popper) {
-          this.popper.scheduleUpdate()
-        } else {
-          this.popper = new PopperJS(this.anchorEl, this.popperEl, {
-            placement: this.placement,
-            modifiers: {
-              ...(this.usePortal && {
-                preventOverflow: {
-                  boundariesElement: 'window'
-                }
-              }),
-              ...this.modifiers
-            },
-            onUpdate: createChainedFunction(
-              this.handlePopperUpdate
-            ),
-            onCreate: createChainedFunction(
-              this.handlePopperCreated
-            ),
-            eventsEnabled: this.eventsEnabled,
-            positionFixed: this.positionFixed
-          })
-        }
-      } else {
-        if (this.popper) {
-          this.popper.destroy()
-          this.popper = null
-          this.$emit('popper:close', {})
-        }
-      }
-    })
-  },
   render (h) {
     const children = this.$slots.default
     if (children.length > 1) {
@@ -167,9 +192,10 @@ const Popper = {
         unmountOnDestroy: true,
         targetSlim: true
       },
-      attrs: {
+      domProps: {
         disabled: !this.usePortal
-      }
+      },
+      ref: 'portalRef'
     }, [h('div', {
       style: {
         display: this.isOpen ? 'unset' : 'none'

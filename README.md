@@ -23,10 +23,9 @@ In your templates:
     <Popper
       :is-open="show"
       :anchor-el="$refs.anchorEl"
-      :popper-el="$refs.popper"
       :on-close="hidePopper"
     >
-      <aside id="popper-content" ref="popper">
+      <aside id="popper-content">
         I am a Happy Popper 😀
       </aside>
     </Popper>
@@ -65,13 +64,12 @@ export default {
 | Props         | Description   | Values | Default |
 | :-------------: |-------------| ----- | --- |
 | anchorEl      | Anchor element around which popper is positioned | `HTMLElement` |  N/A  |
-| popperEl      | Element/Component to render inside popper | `HTMLElement` |  N/A  |
 | placement      | Default position where `popperEl` should be placed when Popper is open | `top`, `right`, `bottom`, `left` |  `bottom`  |
 | modifiers      | Modifier options for `popper.js`. See [popper.js docs]() for more information | `Object` |  `{}`  |
 | isOpen      | Determines whether the Popper is open or not | `Boolean` |  `false`  |
 | onClose  | Handler function to be called when the popper is to be closed | `Function` |  `null`  |
 | closeOnClickAway  | Determines whether popper should close when other elements are clicked | `Boolean` |  `true`  |
-| usePortal  | Determines whether popper should mount `popperEl` in portal before positioning it around anchor. | `Boolean` |  `true`  |
+| usePortal  | Determines whether popper should mount `popperEl` in portal before positioning it around anchor. | `Boolean` |  `false`  |
 | hasArrow  | Determines whether popper should possess arrow when shown | `Boolean` |  `true`  |
 
 
@@ -86,6 +84,7 @@ export default {
 - The `popper:close` event is sometimes emitted **twice** when the popper is being closed when the `closeOnClickAway` props is **truthy**. Currently there are no implemented workarounds for this yet, so while using this component make sure to be careful of it. It's also worth pointing out that this may not be that big of a problem for most consumer use cases
 
 ### 📚TODO
+ - [ ] Finish Popper Portal implementation
  - [ ] Create usePopper utility plugin funciton hook
  - [ ] Publish to NPM
  - [ ] Docs site
