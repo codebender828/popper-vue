@@ -1,35 +1,32 @@
-import { onMounted, onBeforeUnmount } from '@vue/composition-api'
+import { canUseDOM } from '../utils'
 
 const ClickOutside = {
   name: 'ClickOutside',
   props: {
     whitelist: Array,
-    active: Boolean,
-    do: Function
+    do: Function,
+    isDisabled: Boolean
   },
-  setup (props, context) {
-    const listener = (e, el) => {
-      if (
-        e.target === el ||
-        el.contains(e.target) ||
-        (props.whitelist.includes(e.target) && props.active)
-      ) return
-      if (props.do) props.do()
-    }
-
-    onMounted(function () {
-      if (props.active) {
-        document.addEventListener('click', (e) => listener(e, this.$el))
+  created () {
+    if (!this.isDisabled) {
+      const listener = (e, el) => {
+        if (
+          e.target === el ||
+          el.contains(e.target) ||
+          (this.whitelist.includes(e.target))
+        ) return
+        if (this.do) this.do()
       }
-    })
 
-    onBeforeUnmount(function () {
-      if (props.active) {
+      canUseDOM && document.addEventListener('click', (e) => listener(e, this.$el))
+
+      this.$once('hook:beforeDestroy', () => {
         document.removeEventListener('click', (e) => listener(e, this.$el))
-      }
-    })
-
-    return () => context.slots.default()[0]
+      })
+    }
+  },
+  render () {
+    return this.$slots.default[0]
   }
 }
 
