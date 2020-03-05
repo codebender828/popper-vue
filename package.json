@@ -19,9 +19,12 @@
   "files": [
     "dist"
   ],
+  "dependencies": {
+    "portal-vue": "^2.1.7"
+  },
   "peerDependencies": {
     "popper.js": "^1.16.1",
-    "portal-vue": "^2.1.7"
+    "vue": "^2.6.10"
   },
   "babel": {
     "presets": [
@@ -48,6 +51,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.13.0",
+    "rollup": "^1.32.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",

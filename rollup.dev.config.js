@@ -21,8 +21,7 @@ const externals = [
 
 // Globals
 const globals = {
-  'vue': 'Vue',
-  'animejs': 'anime'
+  'vue': 'Vue'
 }
 
 const commons = {
@@ -55,34 +54,6 @@ export default [
         name,
         dir: `build/esm/`,
         format: 'esm',
-        exports: 'named',
-        globals
-      }
-    ],
-    ...commons
-  },
-  {
-    input: 'src/lib/index.js',
-    output: [
-      {
-        banner,
-        name,
-        dir: `build/umd/`,
-        format: 'umd',
-        exports: 'named',
-        globals
-      }
-    ],
-    ...commons
-  },
-  {
-    input: 'src/lib/index.js',
-    output: [
-      {
-        banner,
-        name,
-        dir: `build/cjs/`,
-        format: 'cjs',
         exports: 'named',
         globals
       }
