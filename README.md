@@ -1,5 +1,5 @@
 
-<h1 align="center"><code>🎊 popper-vue (WIP)</code></h1>
+<h1 align="center"><code>🎊 popper-vue</code></h1>
 <h4 align="center">A lightweight bring-your-own-component(BYOC) Popper for Vue.js</h4>
 
 ### 🌟 Features
@@ -7,6 +7,8 @@
 - **Render whatever you want:** Utilize the render callback to create entirely custom poppers.
 - **Functional default styles:** Import the provided css for some nice styling defaults or write your own styles.
 - **Portal your poppers anywhere in the DOM:** You can use a portal element to render your popper, or if you want to yet, use direct child.
+
+### [Codesandbox Demo](https://codesandbox.io/s/popper-vue-starter-nipsz)
 
 ### ⚡️ Installation (🚨 This package has not been published yet)
 ```bash
