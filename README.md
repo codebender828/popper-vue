@@ -10,7 +10,7 @@
 
 ### [Codesandbox Demo](https://codesandbox.io/s/popper-vue-starter-nipsz)
 
-### ⚡️ Installation (🚨 This package has not been published yet)
+### ⚡️ Installation
 ```bash
 $ npm install popper-vue popper.js
 ```
