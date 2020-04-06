@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "codebender828",
+      "name": "Jonathan Bakebwa",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21237954?v=4",
+      "profile": "https://jbakebwa.dev",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "koca",
       "name": "Mesut",
       "avatar_url": "https://avatars2.githubusercontent.com/u/342666?v=4",
