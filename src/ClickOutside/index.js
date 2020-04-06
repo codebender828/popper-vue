@@ -10,10 +10,15 @@ const ClickOutside = {
   created () {
     if (!this.isDisabled) {
       const listener = (e, el) => {
+        const whitelistContainsTarget = this.whitelist.reduce((_, whitelistElement) => {
+          return whitelistElement && whitelistElement.contains(e.target);
+        }, false);
+
         if (
           e.target === el ||
           el.contains(e.target) ||
-          (this.whitelist.includes(e.target))
+          (this.whitelist.includes(e.target)) ||
+          whitelistContainsTarget
         ) return
         if (this.do) this.do()
       }
