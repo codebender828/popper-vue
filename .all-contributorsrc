@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "koca",
+      "name": "Mesut",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342666?v=4",
+      "profile": "http://twitter.com/imesutkoca",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "popper-vue",
+  "projectOwner": "codebender828",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
