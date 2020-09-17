@@ -42,7 +42,7 @@ const Popper = {
       type: Object,
       default: () => {}
     },
-    anchorEl: [HTMLElement, Object],
+    anchorEl: [HTMLElement, SVGPathElement, Object],
     eventsEnabled: {
       type: Boolean,
       default: true
@@ -162,6 +162,7 @@ const Popper = {
      * @returns {Vue.VNode}
      */
     bindArrowClass (node) {
+      if (!node[0].data) node[0].data = {}
       if (node[0].data['staticClass']) node[0].data['staticClass'] += ' popper-vue'
       else node[0].data['staticClass'] = 'popper-vue'
       return node
